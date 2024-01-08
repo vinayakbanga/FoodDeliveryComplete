@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { clearErrors, myOrders } from "../../actions/orderAction";
 // myOrders
 import Loader from '../../Components/Loader';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Metadata
 import { Launch } from '@mui/icons-material';
@@ -16,7 +16,7 @@ import { Fragment,useEffect } from 'react';
 // useParams
 
 const Myorder = () => {
-    const params=useParams();
+    // const params=useParams();
     const dispatch = useDispatch();
 
     // const alert = useAlert();
@@ -34,8 +34,8 @@ const Myorder = () => {
         flex: 0.5,
         cellClassName: (params) => {
           return params.row.status === "Delivered"
-            ? "greenColor"
-            : "redColor";
+            ? "text-green-500"
+            : "text-red-500";
         },
       },
       {

@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Home = () => {
 
   const dispatch =useDispatch();
-  const {loading,error,items,itemsCount}=useSelector(state=>state.items)
+  const {loading,error,items}=useSelector(state=>state.items)
 
 
   useEffect(() => {

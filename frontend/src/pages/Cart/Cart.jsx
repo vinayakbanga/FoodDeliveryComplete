@@ -1,11 +1,12 @@
 import React, { useState , useEffect} from 'react';
 import CartTile from '../Cart/CartTile';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import emptyCart from "../../img/empty-cart.png"
 import cartimg from"../../img/cart-black.png"
 import { useNavigate } from 'react-router-dom';
+// import { clearCart } from '../../Actions/cartActions';
 const Cart = () => {
-  const dispatch=useDispatch();
+  // const dispatch=useDispatch();
   const navigate=useNavigate();
 
 
@@ -31,6 +32,8 @@ const Cart = () => {
 
 const checkOutHandler=()=>{
   navigate("/login/shipping")
+
+  // dispatch(clearCart());
 }
 
 

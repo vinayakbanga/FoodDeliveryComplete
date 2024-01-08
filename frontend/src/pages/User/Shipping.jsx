@@ -21,13 +21,12 @@ const Shipping = () => {
 //   const alert = useAlert();
   const { shippinginfo } = useSelector((state) => state.cart);
 
-  const [address, setAddress] = useState(shippinginfo.address);
-  const [city, setCity] = useState(shippinginfo.city);
-  const [state, setState] = useState(shippinginfo.state);
-  const [country, setCountry] = useState(shippinginfo.country);
-  const [pinCode, setPinCode] = useState(shippinginfo.pinCode);
-  const [phoneNo, setPhoneNo] = useState(shippinginfo.phoneNo);
-
+  const [address, setAddress] = useState(shippinginfo.address || '');
+const [city, setCity] = useState(shippinginfo.city || '');
+const [state, setState] = useState(shippinginfo.state || '');
+const [country, setCountry] = useState(shippinginfo.country || '');
+const [pinCode, setPinCode] = useState(shippinginfo.pinCode || '');
+const [phoneNo, setPhoneNo] = useState(shippinginfo.phoneNo || '');
   const shippingSubmit = (e) => {
     e.preventDefault();
     

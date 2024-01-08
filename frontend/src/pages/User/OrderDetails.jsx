@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 const OrderDetails = () => {
   const { id } = useParams();
   const { order, error, loading } = useSelector((state) => state.orderDetails);
-  const{deliveredAt}= useSelector((state) => state.myOrders);
+  // const{deliveredAt}= useSelector((state) => state.myOrders);
   const dispatch = useDispatch();
   
   

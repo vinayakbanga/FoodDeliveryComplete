@@ -4,12 +4,12 @@ import { useDispatch,useSelector } from 'react-redux';
 import { login,clearErrors } from '../../Actions/userAction';
 import { toast } from 'react-toastify';
 import Loader from '../../Components/Loader';
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const {loading,error,isAuthenticated,user}=useSelector(state=>state.user)
     const navigate = useNavigate();
-    const location=useLocation();
+    // const location=useLocation();
 
     const dispatch=useDispatch();
 // 7:30
@@ -44,7 +44,7 @@ const Login = () => {
             }
         }
         dispatch(clearErrors());
-      }, [dispatch, error,navigate,isAuthenticated]);
+      }, [dispatch, error,navigate,isAuthenticated,user]);
 
 
  

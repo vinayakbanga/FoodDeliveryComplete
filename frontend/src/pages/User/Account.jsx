@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Metadata from '../Metadata';
 import { useSelector } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import Loader from '../../Components/Loader';
 
 const Account = () => {
     const { user,loading, isAuthenticated } = useSelector((state) => state.user);
-    const userRole = user && user.user ? user.user.name : null;
+    // const userRole = user && user.user ? user.user.name : null;
     const navigate = useNavigate();
     useEffect(() => {
         if(isAuthenticated === false){

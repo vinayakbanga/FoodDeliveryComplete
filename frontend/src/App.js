@@ -18,7 +18,7 @@ import { loadUser } from './Actions/userAction';
 import Account from './pages/User/Account';
 // import ProtectedRoute from './Components/Route/protectedRoute';
 import PrivateRoutes from './Components/Route/PrivateRoutes.js';
-import UpdateProfile from"./pages/User/UpdateProfile";
+// import UpdateProfile from"./pages/User/UpdateProfile";
 import Cart from"./pages/Cart/Cart.jsx";
 import Shipping from './pages/User/Shipping.jsx';
 import ConfirmOrder from './pages/Cart/ConfirmOrder.jsx';
@@ -72,8 +72,8 @@ function App() {
 
       {/* Protected Routes */}
       <Route element={<PrivateRoutes />}>
-        <Route path='/account' element={<Account />} />
-        <Route path='/me/update' element={<UpdateProfile />} />
+        {/* <Route path='/account' element={<Account />} /> */}
+        {/* <Route path='/me/update' element={<UpdateProfile />} /> */}
         <Route path='/login/shipping' element={<Shipping />} />
         <Route path='/order/confirm' element={<ConfirmOrder/>} />
         <Route path='/orders/me' element={<Myorder/>} />

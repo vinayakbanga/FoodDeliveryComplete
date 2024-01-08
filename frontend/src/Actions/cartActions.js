@@ -43,8 +43,8 @@
 
 
 // }
-import { useDispatch } from "react-redux";
-import { ADD_TO_CART,REMOVE_CART_ITEM,SAVE_SHIPPING_INFO,UPDATE_QUANTITY } from "../Constants/cartConstant";
+// import { useDispatch } from "react-redux";
+import { ADD_TO_CART,CLEAR_CART,REMOVE_CART_ITEM,SAVE_SHIPPING_INFO,UPDATE_QUANTITY } from "../Constants/cartConstant";
 import axios from "axios";
 
 
@@ -105,3 +105,7 @@ export const saveShippingInfo = (data)=> async(dispatch)=>{
 
     
 } 
+
+export const clearCart = () => ({
+    type: CLEAR_CART,
+  });

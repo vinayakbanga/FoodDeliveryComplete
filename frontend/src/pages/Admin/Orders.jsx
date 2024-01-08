@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import Metadata from "../Metadata";
 import { Edit,Delete } from "@mui/icons-material";
 
-import { deleteOrder,getAllOrders,updateOrder,clearErrors } from "../../Actions/orderAction";
+import { deleteOrder,getAllOrders,clearErrors } from "../../Actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../Constants/orderConstant";
 import { toast } from "react-toastify";
 
@@ -45,7 +45,7 @@ const OrderList = () => {
     }
 
     dispatch(getAllOrders());
-  }, [dispatch, error, deleteError,  isDeleted]);
+  }, [dispatch, error, deleteError,  isDeleted,navigate]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },

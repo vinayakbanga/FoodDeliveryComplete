@@ -22,12 +22,14 @@ import axios from "axios";
 // Event
 // import VpnKeyIcon from "@material-ui/icons/VpnKey";
 // import { createOrder, clearErrors } from "../../actions/orderAction";
-import { Typography } from "@mui/material";
+// import { Typography } from "@mui/material";
 import { CreditCard, Event,VpnKey } from "@mui/icons-material";
 import { CardNumberElement,CardCvcElement,CardExpiryElement ,useStripe,useElements} from "@stripe/react-stripe-js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { clearErrors,createOrder } from "../../Actions/orderAction";
+import { clearCart } from "../../Actions/cartActions";
+// clearCart
 // clearErrors
 const Payment = ({ history }) => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -113,12 +115,14 @@ const Payment = ({ history }) => {
             status: result.paymentIntent.status,
             
           };
-          console.log(order);
+          // console.log(order);
 
           dispatch(createOrder(order));
         toast.success("Order placed")
 
           navigate("/orders/me");
+          dispatch(clearCart());
+
         } else {
           toast.error("There's some issue while processing payment ");
         }

@@ -1,5 +1,5 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+// import { Fragment } from 'react'
+import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon,ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import { useDispatch,useSelector} from 'react-redux'
@@ -8,6 +8,7 @@ import imagef from "../img1/logo.png"
 import { logout } from '../Actions/userAction'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { clearCart } from '../Actions/cartActions'
 //10:30
 
 
@@ -24,7 +25,8 @@ export default function Navbar({user}) {
 
   const userRole = user && user.user ? user.user.role : null;
   const handleLogout=()=>{
-    dispatch(logout());
+    dispatch(logout())
+    dispatch(clearCart());
     toast.success("Logout Sucessfull")
   }
 
@@ -103,7 +105,7 @@ export default function Navbar({user}) {
                   
                   <div className='flex items-center'>
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                  <span class="  rounded-full  text-xs font-medium text-white  mb-5">{cartItems.length}</span>
+                  <span className="  rounded-full  text-xs font-medium text-white  mb-5">{cartItems.length}</span>
                  
                   </div>
                 </button>

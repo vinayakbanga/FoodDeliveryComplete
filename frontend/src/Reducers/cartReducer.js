@@ -35,7 +35,7 @@
 //             return state;
 //     }
 // }
-import { ADD_TO_CART,REMOVE_CART_ITEM,SAVE_SHIPPING_INFO,UPDATE_QUANTITY } from "../Constants/cartConstant";
+import { ADD_TO_CART,REMOVE_CART_ITEM,CLEAR_CART,SAVE_SHIPPING_INFO,UPDATE_QUANTITY } from "../Constants/cartConstant";
 
 export const cartReducer = (state = { cartItems: [],shippinginfo:{} }, action) => {
     switch (action.type) {
@@ -66,6 +66,13 @@ export const cartReducer = (state = { cartItems: [],shippinginfo:{} }, action) =
                     ...state,
                     shippinginfo:action.payload
                 }
+                
+    case CLEAR_CART:
+        return {
+          ...state,
+          cartItems: [],
+        };
+  
 
 
         default:

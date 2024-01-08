@@ -1,17 +1,17 @@
-import React, { useRef, useState,useEffect, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import React, {  useState,useEffect, Fragment } from 'react'
+// import { Link } from 'react-router-dom'
 import { updateProfile,loadUser,clearErrors } from '../../Actions/userAction';
 import { useDispatch,useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
-import Loader from '../../Components/Loader';
+// import Loader from '../../Components/Loader';
 import { useNavigate } from 'react-router-dom';
-import { UPDATE_PROFILE_RESET,CLEAR_ERRORS } from '../../Constants/userConstant';
+import { UPDATE_PROFILE_RESET} from '../../Constants/userConstant';
 // UPDATE_PROFILE_RESET
 
 const UpdateProfile = () => {
   const navigate=useNavigate()
     const {user}=useSelector(state=>state.user)
-    const { error, isUpdated, loading } = useSelector((state) => state.profile);
+    const { error, isUpdated } = useSelector((state) => state.profile);
 const dispatch=useDispatch();
 //  const registerTab= useRef("null")
 const [name, setName] = useState("");
@@ -114,7 +114,7 @@ const registerDataChange=(e)=>{
         });
       }
     
-  }, [dispatch, error,navigate,isUpdated]);
+  }, [dispatch, error,navigate,isUpdated,user]);
 
 
 

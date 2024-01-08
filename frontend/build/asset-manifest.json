@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2906e79e.css",
+    "main.js": "/static/js/main.6a32e5e2.js",
+    "static/js/787.d4aba7ab.chunk.js": "/static/js/787.d4aba7ab.chunk.js",
+    "static/media/Burger1.png": "/static/media/Burger1.8da19977537793f31377.png",
+    "static/media/empty-cart.png": "/static/media/empty-cart.621445dd735630479079.png",
+    "static/media/logo.png": "/static/media/logo.ebabb43240a88546798e.png",
+    "index.html": "/index.html",
+    "main.2906e79e.css.map": "/static/css/main.2906e79e.css.map",
+    "main.6a32e5e2.js.map": "/static/js/main.6a32e5e2.js.map",
+    "787.d4aba7ab.chunk.js.map": "/static/js/787.d4aba7ab.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2906e79e.css",
+    "static/js/main.6a32e5e2.js"
+  ]
+}

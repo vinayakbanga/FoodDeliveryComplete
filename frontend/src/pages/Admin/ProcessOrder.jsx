@@ -155,7 +155,7 @@ const ProcessOrder = () => {
                   </div>
                 </div>
                 <div className="confirmCartItems">
-                <h2 className="font-bold text-lg md:text-2xl text-center mb-4  ">Your Cart Items:</h2>
+                <h2 className="font-bold text-lg md:text-2xl text-center mb-4  "> Cart Items:</h2>
                   <div className="confirmCartItemsContainer">
                     {order.orderItems &&
                       order.orderItems.map((item) => (

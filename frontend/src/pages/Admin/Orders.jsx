@@ -11,6 +11,7 @@ import { Edit,Delete } from "@mui/icons-material";
 import { deleteOrder,getAllOrders,clearErrors } from "../../Actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../Constants/orderConstant";
 import { toast } from "react-toastify";
+import socket from "../../Components/Socket";
 
 
 const OrderList = () => {
@@ -26,6 +27,14 @@ const OrderList = () => {
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
   };
+  let adminArea=window.location.pathname;
+  
+  if(adminArea.includes("admin")){
+      // console.log(adminArea);
+      socket.emit('joinOrderRoom','adminRoom')
+
+    }
+
 
   useEffect(() => {
     if (error) {
@@ -44,11 +53,19 @@ const OrderList = () => {
       dispatch({ type: DELETE_ORDER_RESET });
     }
 
+
+    socket.on('orderPlaced',()=>{
+                      // console.log("hello");
+       dispatch(getAllOrders());
+       toast.success("New Order")
+    })
     dispatch(getAllOrders());
+    
   }, [dispatch, error, deleteError,  isDeleted,navigate]);
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+    { field: "name", headerName: "Customer Name", minWidth: 300, flex: 1 },
 
     {
       field: "status",
@@ -113,6 +130,7 @@ const OrderList = () => {
       if (item.orderStatus !== "Delivered") {
         rows.push({
           id: item._id,
+          name: item.user.name,
           itemsQty: item.orderItems.length,
           amount: item.totalPrice,
           status: item.orderStatus,

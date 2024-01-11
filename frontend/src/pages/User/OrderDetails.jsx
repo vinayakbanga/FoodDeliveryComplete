@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Metadata from "../Metadata";
 import { Link, useParams } from "react-router-dom";
@@ -7,6 +7,13 @@ import Loader from "../../Components/Loader";
 import { getOrderDetails, clearErrors } from "../../Actions/orderAction";
 import { toast } from "react-toastify";
 // import { io } from 'socket.io-client';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// faBox
+
+import { faBox, faCheckCircle, faTruckMoving, faUtensils, faHome } from '@fortawesome/free-solid-svg-icons';
+
+import socket from "../../Components/Socket";
 
 
 
@@ -17,14 +24,39 @@ const OrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
   // const{deliveredAt}= useSelector((state) => state.myOrders);
   const dispatch = useDispatch();
+  const [status, updatedStatus] = useState(order?.orderStatus);
+
+
+  const orderStages = [
+    { name: "Order Placed", key: "Order Placed", icon: faBox },
+    { name: "Order Confirmation", key: "Order Confirmation", icon: faCheckCircle },
+    { name: "Preparation", key: "Preparation", icon: faUtensils },
+    { name: "Out For Delivery", key: "Out for delivery", icon: faTruckMoving },
+    { name: "Delivered", key: "Delivered", icon: faHome }
+  ];
   
+  const getStatusStyle = (stageKey, currentStatus) => {
+    let indexCurrent = orderStages.findIndex(stage => stage.key === currentStatus);
+    let indexStage = orderStages.findIndex(stage => stage.key === stageKey);
   
+    return indexStage <= indexCurrent ? "text-orange-500" : "text-gray-400";
+  };
+  
+  // const socket = io('http://localhost:4000/',{transports:['websocket']});
+  
+
   
   
   
   
   
   useEffect(() => {
+    if(order){
+
+      socket.emit('joinOrderRoom', id);
+    }
+
+    
     // const socket = io('http://localhost:4000/',{transports:['websocket']}); // URL of your Socket.IO server
     
 
@@ -38,14 +70,15 @@ const OrderDetails = () => {
     //   console.log("Socket connection error: ", err);
     // });
     
-  //   socket.on('orderUpdated', (data) => {
-  //     console.log(data.status);
-  //     if (data.orderId === id) {
-  //         // Update your state or UI
-  //         // order.orderStatus=data.status
-  //         // e.g., setOrderStatus(data.status);
-  //     }
-  // });
+    socket.on('orderUpdated', (data) => {
+      updatedStatus(data.status)
+      // toast.success("Status Update")
+      // if (data.orderId === id) {
+      //     // Update your state or UI
+      //     // order.orderStatus=data.status
+      //     // e.g., setOrderStatus(data.status);
+      // }
+  });
   
 
 
@@ -60,7 +93,11 @@ const OrderDetails = () => {
    
 
 
-
+    return () => {
+      socket.off('joinOrderRoom');
+      console.log("off");
+      // socket.off('orderUpdated'); // Turn off any other event listeners
+    };
 
 
   }, [dispatch, error, id]);
@@ -114,15 +151,36 @@ const OrderDetails = () => {
                 </div>
               </div>
 
-              <Typography className="text-xl font-medium">Order Status</Typography>
-              <div className="my-2"> {/* orderDetailsContainerBox */}
-                <div>
-                  <p className={`text-sm ${order.orderStatus && order.orderStatus === "Delivered" ? "text-green-500" : "text-red-500"}`}>
-                    {order.orderStatus && order.orderStatus}
-                  </p>
+              {/* <Typography className="text-xl font-medium">Order Status</Typography> */}
+              {/* <div className="my-2"> orderDetailsContainerBox */}
+                {/* <div> */}
+                  {/* <p className={`text-sm ${order.orderStatus && order.orderStatus === "Delivered" ? "text-green-500" : "text-red-500"}`}> */}
+                    {/* {status} */}
+                  {/* </p> */}
                  
-                </div>
-              </div>
+                {/* </div> */}
+              {/* </div> */}
+              <Typography className="text-xl font-medium">Order Timeline</Typography>
+              <div className="flex justify-between items-center my-4"> {/* Timeline Container */}
+  {orderStages.map((stage, index) => (
+    <Fragment key={index}>
+      <div className="flex flex-col items-center"> {/* Icon and Label Container */}
+        <FontAwesomeIcon
+          icon={stage.icon}
+          className={`h-8 w-8 ${getStatusStyle(stage.key, status)}`}
+          // Adjust size and other styles as needed
+        />
+        <p className={`text-xs mt-2 ${getStatusStyle(stage.key, status)}`}>{stage.name}</p>
+      </div>
+      {index < orderStages.length - 1 && (
+        <div
+          className={`flex-grow border-t-2 ${index < orderStages.findIndex(stage => stage.key === status) ? "border-orange-500" : "border-gray-300"}`}
+          style={{ height: "2px", margin: "0 8px" }}
+        ></div>
+      )}
+    </Fragment>
+  ))}
+</div>
             </div>
 
             <div className="py-2 px-10 border-t border-gray-300"> {/* orderDetailsCartItems */}

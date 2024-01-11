@@ -1,49 +1,4 @@
-// import {ADD_TO_CART} from "../Constants/cartConstant"
-// import axios from "axios";
 
-
-// export const addItemsToCart = (id,qty)=> async (dispatch,getState)=>{
-
-// try {
-
-//     const {data}= await axios.get(`/api/v1/item/${id}`);
-//      // Retrieve current items in the cart
-//      const cartItems = getState().cart.cartItems;
-
-//      const itemExists = cartItems.find(item => item.item === data.item._id);
-
-    
-
-//     dispatch({
-//         type:ADD_TO_CART,
-//         payload:{
-//             item:data.item._id,
-//             name:data.item.name,
-//             price:data.item.price,
-//             image:data.item.image,
-//             quantity:qty
-            
-//         }
-//     });
-
-
-
-
-//     localStorage.setItem("cartitmes",JSON.stringify(getState().cart.cartItems))
-
-    
-// } catch (error) {
-//     alert.error("Error adding item to cart:", error);
-    
-// }
-
-
-
-
-
-
-// }
-// import { useDispatch } from "react-redux";
 import { ADD_TO_CART,CLEAR_CART,REMOVE_CART_ITEM,SAVE_SHIPPING_INFO,UPDATE_QUANTITY } from "../Constants/cartConstant";
 import axios from "axios";
 
@@ -105,6 +60,7 @@ export const saveShippingInfo = (data)=> async(dispatch)=>{
 
     
 } 
+
 
 export const clearCart = () => ({
     type: CLEAR_CART,

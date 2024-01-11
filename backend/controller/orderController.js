@@ -35,6 +35,13 @@ exports.newOrder= catchAsyncErrors(async(req,res,next)=>{
         user: req.user._id,
       });
     //   console.log(req.user._id);
+
+    //emit
+    // /emit event
+  const eventEmitter =req.app.get('eventEmitter');
+
+  eventEmitter.emit('orderPlaced',order)
+    
     
       res.status(201).json({
         success: true,
@@ -75,7 +82,7 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 //4:25
 // get all Orders -- Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find();
+  const orders = await Order.find().populate('user', 'name');
 
   let totalAmount = 0;
 
@@ -93,7 +100,7 @@ exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
 //update order status
 exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   const order = await Order.findById(req.params.id);
-  // const orderId= req.params.id;
+  const orderId= req.params.id;
   // const status= req.body.status;
 
   if(order.orderStatus==="Delivered"){
@@ -105,6 +112,11 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
   if (req.body.status === "Delivered") {
     order.deliveredAt = Date.now();
   }
+
+  //emit event
+  const eventEmitter =req.app.get('eventEmitter');
+
+  eventEmitter.emit('orderUpdated',{id:orderId,status:req.body.status})
 
    
   

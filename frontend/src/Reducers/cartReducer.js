@@ -71,6 +71,7 @@ export const cartReducer = (state = { cartItems: [],shippinginfo:{} }, action) =
         return {
           ...state,
           cartItems: [],
+          shippinginfo:{}
         };
   
 

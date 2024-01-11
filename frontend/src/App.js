@@ -32,7 +32,7 @@ import Orders from './pages/Admin/Orders.jsx';
 import ProcessOrder from './pages/Admin/ProcessOrder.jsx';
 
 
-// const socket = io('http://localhost:4000/',{transports:['websocket']}); // URL of your Socket.IO server
+ // URL of your Socket.IO server
 
 
 
